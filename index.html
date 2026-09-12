@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="WIN Wi-Fi Scanner Web - Diagnostico y mapeo de señal Wi-Fi ambiente por ambiente en tu hogar con fibra óptica WIN.">
+  <title>WIN Wi-Fi Scanner Web | Mapeo Inteligente de Cobertura</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><text y=%2226%22 font-size=%2224%22>&#128225;</text></svg>">
+</head>
+<body>
+  <div class="glow-bg"></div>
+  <div class="phone-frame">
+
+    <header class="win-header">
+      <a href="/" style="text-decoration: none; color: inherit;" title="Volver a la página de WIN">
+        <div class="brand-group">
+          <span class="win-logo-text">WIN<span class="win-dot">.</span></span>
+          <span class="win-app-label">WEB SCANNER</span>
+        </div>
+      </a>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <a href="/" style="color: #ffffff; font-size: 0.76rem; font-weight: 700; text-decoration: none; background: rgba(0,0,0,0.22); padding: 5px 12px; border-radius: 9999px; display: inline-flex; align-items: center; gap: 5px; transition: background 0.2s;" onmouseover="this.style.background='rgba(0,0,0,0.35)'" onmouseout="this.style.background='rgba(0,0,0,0.22)'" title="Volver a la página principal">
+          <span>&larr; Portal WIN</span>
+        </a>
+        <div class="fiber-badge">
+          <span class="fiber-dot"></span>
+          <span>FIBRA 100%</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- SECCION 1: Selector de Ambiente (dropdown) -->
+    <section class="room-selector-section">
+      <div class="room-selector-block">
+        <label for="room-dropdown" class="field-label">&#128205; SELECCIONA EL AMBIENTE A ESCANEAR</label>
+        <div class="select-wrapper">
+          <select id="room-dropdown" class="win-select">
+            <option value="">&#8212; Elige un ambiente &#8212;</option>
+            <optgroup label="Ambientes comunes">
+              <option value="sala|Sala / Comedor|true">&#128715; Sala / Comedor (Ubicación del Router)</option>
+              <option value="dorm_principal|Dormitorio Principal|false">&#128716; Dormitorio Principal</option>
+              <option value="estudio|Estudio / Home Office|false">&#128187; Estudio / Home Office</option>
+              <option value="cocina|Cocina|false">&#129363; Cocina</option>
+              <option value="piso2|2do Piso / Terraza|false">&#129754; 2do Piso / Terraza</option>
+              <option value="bano|Baño|false">&#128703; Baño</option>
+              <option value="garage|Garaje / Cochera|false">&#128663; Garaje / Cochera</option>
+              <option value="jardin|Jardín / Patio|false">&#127807; Jardín / Patio</option>
+              <option value="comedor|Comedor|false">&#127373; Comedor</option>
+              <option value="lavanderia|Lavandería|false">&#129338; Lavandería</option>
+            </optgroup>
+          </select>
+          <span class="select-arrow">&#9660;</span>
+        </div>
+        <div class="custom-room-row">
+          <input type="text" id="custom-room-input" class="custom-room-input" placeholder="+ Escribir otro ambiente (ej: Balcón)">
+          <button id="btn-add-custom-room" class="btn-add-room" title="Agregar al dropdown">+</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="scan-divider"></div>
+
+    <!-- SECCION 2: Scanner -->
+    <section class="scanner-section" id="main-scan-view">
+      <!-- Banner ambiente actual -->
+      <div class="current-room-banner" id="current-room-banner">
+        <span class="current-room-icon" id="current-measuring-icon">&#128225;</span>
+        <div>
+          <h2 class="current-room-title" id="current-measuring-name">Listo para escanear</h2>
+          <p class="current-room-hint" id="current-measuring-hint">Selecciona un ambiente arriba y presiona Iniciar Escaneo</p>
+        </div>
+      </div>
+
+      <!-- Badge escaneo en vivo -->
+      <div class="step-nav-header" id="scan-live-badge" style="display:none;">
+        <div class="active-measuring-badge">
+          <span class="pulse-measuring-dot"></span>
+          <span>ESCANEANDO EN VIVO</span>
+        </div>
+        <span class="step-progress-text" id="measuring-progress-text">Ambiente 1</span>
+      </div>
+
+      <!-- Radar -->
+      <div class="radar-visualizer-container">
+        <div class="radar-circle radar-c3"></div>
+        <div class="radar-circle radar-c2"></div>
+        <div class="radar-circle radar-c1"></div>
+        <div class="radar-sweep-beam" id="radar-sweep"></div>
+        <div class="radar-center-hub">
+          <svg class="radar-center-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+            <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+            <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+            <circle cx="12" cy="20" r="2" fill="currentColor"></circle>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Status mensaje -->
+      <div class="scan-status-message" id="scan-status-message">
+        Selecciona un ambiente para comenzar el diagnóstico.
+      </div>
+
+      <!-- Métricas en vivo (100% Reales) -->
+      <div class="live-metrics-grid">
+        <!-- Descarga real (Cloudflare) -->
+        <div class="live-metric-box">
+          <span class="metric-label">DESCARGA</span>
+          <div class="metric-value-row">
+            <span class="metric-val text-green" id="metric-download">--</span>
+            <span class="metric-unit">Mbps</span>
+          </div>
+          <span class="metric-sublabel">internet real</span>
+        </div>
+        <!-- Subida real -->
+        <div class="live-metric-box">
+          <span class="metric-label">SUBIDA</span>
+          <div class="metric-value-row">
+            <span class="metric-val text-green" id="metric-upload">--</span>
+            <span class="metric-unit">Mbps</span>
+          </div>
+          <span class="metric-sublabel">internet real</span>
+        </div>
+        <!-- Latencia real -->
+        <div class="live-metric-box">
+          <span class="metric-label">LATENCIA (PING)</span>
+          <div class="metric-value-row">
+            <span class="metric-val" id="metric-ping">--</span>
+            <span class="metric-unit">ms</span>
+          </div>
+          <span class="metric-sublabel">tiempo de respuesta</span>
+        </div>
+        <!-- Jitter real -->
+        <div class="live-metric-box">
+          <span class="metric-label">JITTER</span>
+          <div class="metric-value-row">
+            <span class="metric-val" id="metric-jitter">--</span>
+            <span class="metric-unit">ms</span>
+          </div>
+          <span class="metric-sublabel">estabilidad</span>
+        </div>
+      </div>
+
+      <!-- Calificación del último escaneo (sin puntos de semáforo) -->
+      <div class="verdict-card" id="verdict-card" style="display:none;">
+        <div class="verdict-right">
+          <span class="verdict-label" id="verdict-label">--</span>
+          <span class="verdict-msg" id="verdict-msg">--</span>
+        </div>
+      </div>
+
+      <!-- Botón principal -->
+      <div class="action-footer">
+        <button id="btn-start-scan" class="btn-win-primary" disabled>
+          <span id="btn-start-scan-text">Selecciona un ambiente</span>
+          <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </div>
+    </section>
+
+    <div class="scan-divider"></div>
+
+    <!-- SECCION 3: Ambientes Escaneados (lista comparativa ordenada) -->
+    <section class="scanned-list-section" id="scanned-list-section">
+      <div class="scanned-list-header">
+        <span class="scanned-list-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="list-icon">
+            <line x1="8" y1="6" x2="21" y2="6"></line>
+            <line x1="8" y1="12" x2="21" y2="12"></line>
+            <line x1="8" y1="18" x2="21" y2="18"></line>
+            <line x1="3" y1="6" x2="3.01" y2="6"></line>
+            <line x1="3" y1="12" x2="3.01" y2="12"></line>
+            <line x1="3" y1="18" x2="3.01" y2="18"></line>
+          </svg>
+          Ambientes Escaneados
+        </span>
+        <span class="scanned-count-badge" id="scanned-count-badge">0</span>
+      </div>
+
+      <div class="scanned-rooms-list" id="scanned-rooms-list">
+        <div class="scanned-empty-state" id="scanned-empty-state">
+          <span class="empty-icon">&#127968;</span>
+          <span class="empty-text">Aún no has escaneado ningún ambiente</span>
+        </div>
+      </div>
+
+      <div class="scan-summary-bar" id="scan-summary-bar" style="display:none;">
+        <div class="summary-stat">
+          <span class="summary-stat-label">Total</span>
+          <span class="summary-stat-val" id="summary-total">0</span>
+        </div>
+        <div class="summary-stat">
+          <span class="summary-stat-label">Óptimos</span>
+          <span class="summary-stat-val text-green" id="summary-good">0</span>
+        </div>
+        <div class="summary-stat">
+          <span class="summary-stat-label">Aceptables</span>
+          <span class="summary-stat-val text-orange" id="summary-warn">0</span>
+        </div>
+        <div class="summary-stat">
+          <span class="summary-stat-label">Críticos</span>
+          <span class="summary-stat-val text-red" id="summary-bad">0</span>
+        </div>
+      </div>
+
+      <div class="report-bottom-actions" id="list-actions" style="display:none;">
+        <button id="btn-print-report" class="btn-secondary-win">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>Descargar PDF</span>
+        </button>
+        <button id="btn-clear-list" class="btn-ghost-win">
+          <span>Limpiar Lista</span>
+        </button>
+        <button id="btn-clear-history" class="btn-ghost-win btn-ghost-danger">
+          <span>Borrar historial</span>
+        </button>
+      </div>
+    </section>
+
+    <div class="scan-divider"></div>
+
+    <!-- SECCION 4: Diagnóstico General (visible con 2+ escaneos) -->
+    <section id="diagnosis-section" class="diagnosis-section" style="display:none;">
+      <div class="diag-header">
+        <span class="diag-header-icon">🔍</span>
+        <span class="diag-header-title">DIAGNÓSTICO GENERAL</span>
+      </div>
+      <div class="diag-body">
+        <span class="diag-emoji" id="diag-icon">📶</span>
+        <p class="diag-text" id="diag-text">Analizando cobertura…</p>
+      </div>
+    </section>
+
+    <!-- SECCION 5: Banner incentivo + Envío (visible con 1+ escaneos) -->
+    <section id="send-section" class="send-section" style="display:none;">
+      <div class="incentive-banner">
+        <span class="incentive-icon">📣</span>
+        <div
+          class="incentive-text"
+          id="incentive-text"
+          contenteditable="true"
+          data-placeholder="Tu reporte ayuda a mejorar el servicio en tu zona. ¡Enviarlo solo toma un segundo!"
+        ></div>
+      </div>
+      <button id="btn-send-report" class="btn-send-report">
+        <svg class="btn-send-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+        <span>Enviar reporte a WIN</span>
+      </button>
+      <p class="send-note">El texto del reporte se abrirá en <strong>WhatsApp</strong> para que lo revises antes de enviar.</p>
+    </section>
+
+    <footer class="win-app-footer">
+      <span>WIN Internet &bull; Tecnología 100% Fibra Óptica</span>
+      <span class="device-id-label">ID: <span id="device-id-display">—</span></span>
+    </footer>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
