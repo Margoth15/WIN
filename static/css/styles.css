@@ -1,0 +1,1716 @@
+/* ==========================================================================
+   WIN Wi-Fi Scanner Web - Brand Stylesheet
+   Identidad Oficial: WIN Perú (100% Fibra Óptica)
+   Colores marca WIN: Naranja #FF6400, Fondo blanco #F5F5F5, Texto #111
+   ========================================================================== */
+
+:root {
+  /* Colores BASE — estilo win.pe */
+  --bg-body:        #EDEDED;
+  --bg-frame:       #FFFFFF;
+  --bg-card:        #F8F8F8;
+  --bg-card-hover:  #F0F0F0;
+  --bg-input:       #FFFFFF;
+
+  /* Naranja WIN exacto */
+  --win-orange:       #FF6400;
+  --win-orange-hover: #E55A00;
+  --win-orange-glow:  rgba(255, 100, 0, 0.28);
+  --win-orange-bg:    rgba(255, 100, 0, 0.08);
+
+  /* Verde éxito */
+  --fiber-green:     #00B87A;
+  --fiber-green-glow: rgba(0, 184, 122, 0.3);
+  --fiber-green-bg:   rgba(0, 184, 122, 0.10);
+
+  /* Estados */
+  --status-red:      #E5303A;
+  --status-red-bg:   rgba(229, 48, 58, 0.10);
+  --status-amber:    #F5A623;
+  --status-amber-bg: rgba(245, 166, 35, 0.12);
+
+  /* Texto */
+  --text-main:   #111111;
+  --text-muted:  #555555;
+  --text-faint:  #888888;
+
+  /* Bordes */
+  --border-subtle: rgba(0, 0, 0, 0.09);
+  --border-active: rgba(255, 100, 0, 0.55);
+
+  /* Tipografía */
+  --font-main: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', Consolas, monospace;
+
+  /* Radio */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 9999px;
+
+  --transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-body);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 0 40px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Fondo sutil */
+.glow-bg {
+  display: none;
+}
+
+/* ==========================================================================
+   Contenedor Principal
+   ========================================================================== */
+
+.phone-frame {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 480px;
+  background-color: var(--bg-frame);
+  border: none;
+  border-radius: 0;
+  padding: 0 0 28px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  min-height: 100vh;
+}
+
+/* ==========================================================================
+   Header Superior de Marca WIN — Naranja sólido
+   ========================================================================== */
+
+.win-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: var(--win-orange);
+  margin-bottom: 0;
+}
+
+.brand-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.win-logo-text {
+  font-size: 1.65rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.win-dot {
+  color: rgba(255,255,255,0.5);
+}
+
+.win-app-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.80);
+  text-transform: uppercase;
+  background: rgba(255,255,255,0.15);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+}
+
+.fiber-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.35);
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.04em;
+}
+
+.fiber-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.8; }
+}
+
+/* ==========================================================================
+   Vistas de Pasos (Step Views)
+   ========================================================================== */
+
+.step-view {
+  display: none;
+  flex-direction: column;
+  flex: 1;
+  animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.step-view.active {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   PASO 1: ONBOARDING / BIENVENIDA
+   ========================================================================== */
+
+.hero-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 22px 18px;
+  text-align: center;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--win-orange), transparent);
+}
+
+.wifi-hero-icon-box {
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 12px;
+  background: var(--win-orange-bg);
+  border: 1px solid rgba(255, 94, 0, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px var(--win-orange-glow);
+}
+
+.wifi-hero-icon {
+  width: 30px;
+  height: 30px;
+  color: var(--win-orange);
+}
+
+.hero-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.hero-subtitle {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.main-heading-block {
+  margin-bottom: 24px;
+}
+
+.main-title {
+  font-size: 1.7rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+
+.highlight-text {
+  color: #ffffff;
+  background: linear-gradient(90deg, #ffffff, #cbd5e1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.main-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.form-section {
+  margin-bottom: 24px;
+}
+
+.field-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.win-input {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  font-size: 1rem;
+  font-family: inherit;
+  color: #ffffff;
+  outline: none;
+  transition: var(--transition);
+}
+
+.win-input:focus {
+  border-color: var(--win-orange);
+  box-shadow: 0 0 0 3px var(--win-orange-glow);
+}
+
+.win-input::placeholder {
+  color: var(--text-faint);
+}
+
+.clear-input-btn {
+  position: absolute;
+  right: 14px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.3rem;
+  cursor: pointer;
+  padding: 2px;
+}
+
+.clear-input-btn.hidden {
+  display: none;
+}
+
+.field-hint {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-faint);
+  margin-top: 6px;
+}
+
+.action-footer {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  padding-top: 4px;
+}
+
+.btn-win-primary {
+  width: 100%;
+  background: var(--win-orange);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 15px 20px;
+  font-size: 1rem;
+  font-weight: 800;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px var(--win-orange-glow);
+  transition: var(--transition);
+  letter-spacing: 0.01em;
+}
+
+.btn-win-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(255, 100, 0, 0.45);
+  background: var(--win-orange-hover);
+}
+
+.btn-win-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-win-primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn-arrow {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s ease;
+}
+
+.btn-win-primary:hover:not(:disabled) .btn-arrow {
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   PASO 2: SELECTOR DE AMBIENTES Y NIVELES
+   ========================================================================== */
+
+.step-nav-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.btn-back {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-back:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn-back svg {
+  width: 18px;
+  height: 18px;
+}
+
+.step-progress-text {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--win-orange);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.heading-block-compact {
+  margin-bottom: 16px;
+}
+
+.sub-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+
+.sub-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.home-type-selector {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  background: var(--bg-input);
+  padding: 4px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+}
+
+.home-type-pill {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  padding: 8px 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-family: inherit;
+  transition: var(--transition);
+}
+
+.home-type-pill.active {
+  background: var(--bg-card);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.rooms-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+  max-height: 280px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.room-chip {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+}
+
+.room-chip:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.room-chip.selected {
+  border-color: var(--win-orange);
+  background: rgba(255, 94, 0, 0.08);
+}
+
+.room-icon {
+  font-size: 1.4rem;
+}
+
+.room-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.room-name {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.room-tag {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.room-check {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  color: transparent;
+  transition: var(--transition);
+}
+
+.room-chip.selected .room-check {
+  background: var(--win-orange);
+  border-color: var(--win-orange);
+  color: #ffffff;
+  box-shadow: 0 0 10px var(--win-orange-glow);
+}
+
+.custom-room-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.custom-room-input {
+  flex: 1;
+  background: #FFFFFF;
+  border: 1.5px dashed rgba(0,0,0,0.15);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  color: var(--text-main);
+  font-family: inherit;
+  outline: none;
+}
+
+.custom-room-input:focus {
+  border-color: var(--win-orange);
+}
+
+.btn-add-room {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--win-orange);
+  font-size: 1.2rem;
+  font-weight: 700;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.btn-add-room:hover {
+  background: var(--win-orange);
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   PASO 3: SIMULADOR DE MEDICIÓN EN TIEMPO REAL CON RADARES/MÉTRICAS
+   ========================================================================== */
+
+.active-measuring-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--win-orange);
+  background: var(--win-orange-bg);
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 100, 0, 0.3);
+}
+
+.pulse-measuring-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--win-orange);
+  border-radius: 50%;
+  animation: pulse-dot 1.5s infinite;
+}
+
+.current-room-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--win-orange-bg);
+  border: 1.5px solid rgba(255, 100, 0, 0.25);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  margin-bottom: 20px;
+}
+
+.current-room-icon {
+  font-size: 1.6rem;
+}
+
+.current-room-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.current-room-hint {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* Radar Animado */
+.radar-visualizer-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radar-circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 100, 0, 0.18);
+}
+
+.radar-c1 { width: 70px; height: 70px; }
+.radar-c2 { width: 130px; height: 130px; border-color: rgba(255, 100, 0, 0.28); }
+.radar-c3 { width: 190px; height: 190px; border-color: rgba(255, 100, 0, 0.38); box-shadow: 0 0 20px rgba(255,100,0,0.07); }
+
+.radar-sweep-beam {
+  position: absolute;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, rgba(255, 100, 0, 0.35) 0deg, transparent 60deg, transparent 360deg);
+  animation: radar-rotate 2s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes radar-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.radar-center-hub {
+  position: relative;
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--win-orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px var(--win-orange);
+}
+
+.radar-center-icon {
+  width: 22px;
+  height: 22px;
+  color: #ffffff;
+}
+
+.scan-status-message {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-bottom: 18px;
+  min-height: 22px;
+}
+
+/* Grilla de Métricas en Vivo — 2×2 para 4 métricas reales */
+.live-metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* Reducir fuente cuando el valor es texto largo (ej: "1 Gbps", "-62 dBm") */
+.live-metric-box .metric-val {
+  font-size: 1.25rem;
+}
+
+.live-metric-box {
+  background: #FFFFFF;
+  border: 1.5px solid rgba(0,0,0,0.08);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.metric-label {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.metric-value-row {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.metric-val {
+  font-family: var(--font-mono);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.metric-unit {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.text-green { color: var(--fiber-green); }
+.text-orange { color: var(--win-orange); }
+
+.metric-sublabel {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--text-faint);
+  margin-top: 2px;
+}
+
+.metric-bar-wrap {
+  width: 100%;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  margin-top: 6px;
+  overflow: hidden;
+}
+
+.metric-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--status-red), var(--win-orange), var(--fiber-green));
+  border-radius: 4px;
+  transition: width 0.4s ease-out;
+}
+
+/* ==========================================================================
+   PASO 4: REPORTE INTELIGENTE Y ACCIONES 1-CLIC (WIN MESH)
+   ========================================================================== */
+
+.report-header-card {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.report-badge-status {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: var(--fiber-green-bg);
+  color: var(--fiber-green);
+  border: 1px solid rgba(0, 214, 143, 0.3);
+  padding: 4px 14px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 8px;
+  letter-spacing: 0.04em;
+}
+
+.report-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+
+.report-client-info {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.room-results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 18px;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.room-result-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+}
+
+.room-res-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.room-res-name {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.room-res-metrics {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.room-res-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.res-good { background: var(--fiber-green-bg); color: var(--fiber-green); }
+.res-warn { background: var(--status-amber-bg); color: var(--status-amber); }
+.res-bad  { background: var(--status-red-bg); color: var(--status-red); }
+
+/* Tarjeta WIN Mesh */
+.mesh-card-callout {
+  background: linear-gradient(145deg, rgba(255, 94, 0, 0.12) 0%, rgba(19, 27, 46, 0.95) 100%);
+  border: 1px solid rgba(255, 94, 0, 0.35);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  margin-bottom: 18px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.mesh-header-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.mesh-icon-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--win-orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  flex-shrink: 0;
+  box-shadow: 0 0 15px var(--win-orange-glow);
+}
+
+.mesh-icon-wrap svg {
+  width: 22px;
+  height: 22px;
+}
+
+.mesh-title {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.mesh-subtitle {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.mesh-desc {
+  font-size: 0.82rem;
+  color: #cbd5e1;
+  line-height: 1.4;
+  margin-bottom: 14px;
+}
+
+.one-click-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-whatsapp {
+  background: #25D366;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+  transition: var(--transition);
+}
+
+.btn-whatsapp:hover {
+  background: #22bf5b;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+}
+
+.whatsapp-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.btn-outline-support {
+  background: transparent;
+  color: #ffffff;
+  text-decoration: none;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: var(--transition);
+}
+
+.btn-outline-support:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn-outline-support svg {
+  width: 16px;
+  height: 16px;
+  color: var(--win-orange);
+}
+
+.report-bottom-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-secondary-win {
+  flex: 1;
+  background: #FFFFFF;
+  border: 1.5px solid rgba(0,0,0,0.12);
+  color: var(--text-main);
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  font-size: 0.82rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: var(--transition);
+}
+
+.btn-secondary-win:hover {
+  border-color: var(--win-orange);
+  background: var(--bg-card-hover);
+}
+
+.btn-secondary-win svg {
+  width: 16px;
+  height: 16px;
+}
+
+.btn-ghost-win {
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.1);
+  color: var(--text-muted);
+  padding: 10px 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: var(--transition);
+  border-radius: var(--radius-md);
+}
+
+.btn-ghost-win:hover {
+  color: var(--text-main);
+  border-color: rgba(0,0,0,0.25);
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.win-app-footer {
+  margin-top: 18px;
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--text-faint);
+  border-top: 1px solid rgba(0,0,0,0.08);
+  padding: 14px 20px 0;
+}
+
+/* ==========================================================================
+   NUEVO LAYOUT FRAME UNICO
+   ========================================================================== */
+
+/* Separador visual entre secciones */
+.scan-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(0,0,0,0.08);
+  margin: 16px 0;
+}
+
+/* --------------------------------------------------------
+   SECCION 1: Room Selector
+   -------------------------------------------------------- */
+.room-selector-section {
+  padding: 18px 20px 4px;
+}
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.section-label-icon {
+  font-size: 0.85rem;
+}
+
+/* Grid de pills */
+.rooms-pill-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.room-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  padding: 7px 14px;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.room-pill:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.room-pill.active {
+  background: var(--win-orange-bg);
+  border-color: var(--win-orange);
+  color: #ffffff;
+  box-shadow: 0 0 12px var(--win-orange-glow);
+}
+
+.room-pill.scanned {
+  background: var(--fiber-green-bg);
+  border-color: rgba(0, 214, 143, 0.4);
+  color: var(--fiber-green);
+  opacity: 0.75;
+}
+
+.pill-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.pill-name {
+  font-size: 0.8rem;
+}
+
+/* --------------------------------------------------------
+   SECCION 2: Scanner
+   -------------------------------------------------------- */
+.scanner-section {
+  padding: 0 20px;
+}
+
+/* --------------------------------------------------------
+   SECCION 3: Carrito de Ambientes Escaneados
+   -------------------------------------------------------- */
+.scanned-list-section {
+  padding: 4px 20px;
+}
+
+.scanned-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.scanned-list-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.list-icon {
+  width: 16px;
+  height: 16px;
+  color: var(--win-orange);
+  flex-shrink: 0;
+}
+
+.scanned-count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  background: var(--win-orange);
+  color: #ffffff;
+  border-radius: var(--radius-pill);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.scanned-rooms-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+/* Estado vacio */
+.scanned-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 24px 16px;
+  background: var(--bg-card);
+  border: 1.5px dashed rgba(0,0,0,0.12);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 1.8rem;
+  opacity: 0.5;
+}
+
+.empty-text {
+  font-size: 0.82rem;
+  color: var(--text-faint);
+}
+
+/* Items del carrito */
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #FFFFFF;
+  border: 1.5px solid rgba(0,0,0,0.08);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s ease;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+}
+
+.cart-item.cart-item-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.cart-item:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.cart-item-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.cart-item-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.cart-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.cart-item-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cart-item-metrics {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.cart-item-delta {
+  font-size: 0.68rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  margin-top: 2px;
+}
+
+.cart-item-time {
+  font-size: 0.68rem;
+  color: var(--text-faint);
+}
+
+.cart-item-time {
+  font-size: 0.68rem;
+  color: var(--text-faint);
+}
+
+.cart-item-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.cart-remove-btn {
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.62rem;
+  color: var(--text-faint);
+  cursor: pointer;
+  transition: var(--transition);
+  padding: 0;
+}
+
+.cart-remove-btn:hover {
+  background: var(--status-red-bg);
+  border-color: var(--status-red);
+  color: var(--status-red);
+}
+
+/* Barra de resumen */
+.scan-summary-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--win-orange);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+  margin-bottom: 12px;
+  gap: 8px;
+}
+
+.summary-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+
+.summary-stat-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.75);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.summary-stat-val {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.text-red { color: var(--status-red); }
+
+/* Dropdown selector de ambientes */
+.room-selector-block {
+  margin-bottom: 6px;
+}
+
+.select-wrapper {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.win-select {
+  width: 100%;
+  background: #FFFFFF;
+  border: 1.5px solid rgba(0,0,0,0.12);
+  border-radius: var(--radius-md);
+  padding: 13px 40px 13px 16px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--text-main);
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.win-select:focus {
+  border-color: var(--win-orange);
+  box-shadow: 0 0 0 3px var(--win-orange-glow);
+}
+
+.win-select option,
+.win-select optgroup {
+  background: #ffffff;
+  color: var(--text-main);
+}
+
+.select-arrow {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--win-orange);
+  font-size: 0.8rem;
+  pointer-events: none;
+}
+
+/* Estilos de Impresion */
+@media print {
+  body {
+    background: #ffffff;
+    color: #000000;
+  }
+  .phone-frame {
+    box-shadow: none;
+    border: none;
+    max-width: 100%;
+  }
+  .glow-bg, .btn-win-primary, .btn-whatsapp, .btn-outline-support, .report-bottom-actions,
+  .room-selector-section, .scan-divider, .action-footer, .cart-remove-btn,
+  #send-section, #diagnosis-section {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   NUEVAS FEATURES v2
+   ========================================================================== */
+
+/* --------------------------------------------------------
+   Score badge semáforo en cards de lista
+   -------------------------------------------------------- */
+.cart-score-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 800;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.cart-score-pts {
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  opacity: 0.8;
+}
+
+.score-excellent {
+  background: rgba(0, 214, 143, 0.15);
+  color: var(--fiber-green);
+  border: 1px solid rgba(0, 214, 143, 0.4);
+}
+
+.score-good {
+  background: rgba(255, 165, 2, 0.15);
+  color: var(--status-amber);
+  border: 1px solid rgba(255, 165, 2, 0.4);
+}
+
+.score-regular {
+  background: rgba(255, 94, 0, 0.15);
+  color: var(--win-orange);
+  border: 1px solid rgba(255, 94, 0, 0.4);
+}
+
+.score-weak {
+  background: var(--status-red-bg);
+  color: var(--status-red);
+  border: 1px solid rgba(255, 71, 87, 0.4);
+}
+
+/* --------------------------------------------------------
+   Rank número en item del carrito
+   -------------------------------------------------------- */
+.cart-item-rank {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-faint);
+  min-width: 16px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------------
+   Delta historial (antes → ahora)
+   -------------------------------------------------------- */
+.cart-item-delta {
+  font-size: 0.68rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  margin-top: 2px;
+}
+
+/* --------------------------------------------------------
+   Veredicto card (aparece tras cada escaneo)
+   -------------------------------------------------------- */
+.verdict-card {
+  display: flex;
+  align-items: flex-start;
+  background: #FFFFFF;
+  border: 1.5px solid rgba(0,0,0,0.08);
+  border-left: 4px solid var(--win-orange);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  animation: fadeIn 0.4s ease;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(255,100,0,0.08);
+}
+
+.verdict-right {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.verdict-label {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--win-orange);
+  letter-spacing: 0.03em;
+}
+
+.verdict-msg {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  word-break: break-word;
+  margin-top: 2px;
+}
+
+
+/* --------------------------------------------------------
+   Diagnóstico general
+   -------------------------------------------------------- */
+.diagnosis-section {
+  background: #FFFFFF;
+  border: 1.5px solid rgba(0,0,0,0.08);
+  border-left: 4px solid var(--win-orange);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-top: 4px;
+  animation: fadeIn 0.35s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.diag-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.diag-header-icon {
+  font-size: 1rem;
+}
+
+.diag-header-title {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.diag-body {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.diag-emoji {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.diag-text {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.diag-text strong {
+  color: var(--text-main);
+  font-weight: 700;
+}
+
+/* --------------------------------------------------------
+   Sección de envío — banner incentivo + botón
+   -------------------------------------------------------- */
+.send-section {
+  margin-top: 4px;
+  padding: 0 20px;
+  animation: fadeIn 0.35s ease;
+}
+
+.incentive-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: linear-gradient(135deg, rgba(255, 94, 0, 0.1) 0%, rgba(255, 94, 0, 0.05) 100%);
+  border: 1px solid rgba(255, 94, 0, 0.3);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  margin-bottom: 12px;
+}
+
+.incentive-icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.incentive-text {
+  flex: 1;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  outline: none;
+  min-height: 22px;
+}
+
+/* Placeholder CSS para div contenteditable */
+.incentive-text:empty::before {
+  content: attr(data-placeholder);
+  color: var(--text-faint);
+  pointer-events: none;
+}
+
+.incentive-text:focus {
+  color: var(--text-main);
+}
+
+.btn-send-report {
+  width: 100%;
+  background: linear-gradient(135deg, #128C7E 0%, #25D366 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 15px 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.25);
+  transition: var(--transition);
+  margin-bottom: 8px;
+}
+
+.btn-send-report:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.4);
+  background: linear-gradient(135deg, #0f7a6e 0%, #1fba58 100%);
+}
+
+.btn-send-report:active {
+  transform: translateY(0);
+}
+
+.btn-send-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.send-note {
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--text-faint);
+}
+
+.send-note strong {
+  color: var(--text-muted);
+}
+
+/* --------------------------------------------------------
+   Botón borrar historial (ghost rojo)
+   -------------------------------------------------------- */
+.btn-ghost-danger {
+  color: var(--status-red) !important;
+  opacity: 0.75;
+}
+
+.btn-ghost-danger:hover {
+  opacity: 1;
+  background: var(--status-red-bg) !important;
+  border-color: var(--status-red) !important;
+}
+
+/* --------------------------------------------------------
+   ID dispositivo en footer
+   -------------------------------------------------------- */
+.win-app-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.device-id-label {
+  font-size: 0.65rem;
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  opacity: 0.6;
+}
+

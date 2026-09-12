@@ -1,0 +1,6 @@
+# WIN Wi-Fi Scanner Web
+# Este proyecto está diseñado para funcionar nativamente con la biblioteca estándar de Python (>= 3.8).
+# No se requieren dependencias externas obligatorias para iniciar el servidor.
+#
+# Dependencias opcionales sugeridas para desarrollo avanzado:
+requests>=2.31.0

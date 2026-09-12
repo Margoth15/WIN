@@ -1,0 +1,34 @@
+{
+  "version": 2,
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/templates/paginaWin.html"
+    },
+    {
+      "source": "/paginaWin",
+      "destination": "/templates/paginaWin.html"
+    },
+    {
+      "source": "/paginaWin.html",
+      "destination": "/templates/paginaWin.html"
+    },
+    {
+      "source": "/index.html",
+      "destination": "/templates/index.html"
+    },
+    {
+      "source": "/index",
+      "destination": "/templates/index.html"
+    },
+    {
+      "source": "/scanner",
+      "destination": "/templates/index.html"
+    },
+    {
+      "source": "/static/(.*)",
+      "destination": "/static/$1"
+    }
+  ]
+}

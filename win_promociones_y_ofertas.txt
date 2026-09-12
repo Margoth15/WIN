@@ -1,0 +1,93 @@
+====================================================================
+           WIN PERÚ - REPORTE DE SCRAPING DE PLANES Y PROMOCIONES   
+====================================================================
+* Nota: Los precios están expresados en Soles (S/). Todos los planes
+incluyen Internet 100% Fibra Óptica (FTTH) Simétrica. Las siglas MDT 
+(Mitad de Tarifa) suelen aplicar a descuentos del 50% por 1 o 2 meses 
+dependiendo de la campaña en Lima (L) o Provincia (P).
+
+1. MONO WIN (Solo Internet)
+--------------------------------------------------------------------
+Planes ideales para usuarios que ya cuentan con servicios de streaming 
+y no necesitan canales lineales de TV.
+
+    1.1 Promo MDT L (Lima)
+        - 750 Mbps: S/ 109.00 al mes
+        - 850 Mbps: S/ 119.00 al mes (El más popular)
+        - 1000 Mbps (1 Gbps): S/ 139.00 al mes (Incluye 1 Mesh a solicitud)
+        * Promociones MDT (Mitad de Tarifa) sujetas a campañas 
+          temporales de 50% de descuento el primer mes.
+
+    1.2 Promo MDT P (Provincias)
+        - Aplican los mismos planes base (750, 850 y 1000 Mbps). 
+        - Consultar factibilidad y promociones focalizadas de instalación 
+          gratuita en regiones fuera de Lima.
+
+2. PROMO HB (Hard Bundle / Dúos: Internet + WIN TV / DGO / L1MAX)
+--------------------------------------------------------------------
+Planes combinados para hogares que buscan Internet más entretenimiento digital.
+
+    2.1 Promo HB L (Lima)
+        - 750 Mbps + WIN TV Premium (+80 canales): S/ 109.90 al mes
+        - 850 Mbps + WIN TV Premium: S/ 119.90 al mes
+        - 1000 Mbps + WIN TV Premium: S/ 139.90 al mes
+        - 850 Mbps + L1MAX Premium (Fútbol Peruano): S/ 129.90 al mes
+        - 1000 Mbps + L1MAX Premium: S/ 149.90 al mes
+        - 850 Mbps + DGO Hogar (TV por Streaming): S/ 139.90 al mes
+        - 1000 Mbps + DGO Full: S/ 179.90 al mes
+
+    2.2 Promo HB P (Provincias)
+        - Misma estructura de precios para provincias con cobertura WIN.
+        - Beneficios adicionales: Mesh gratis a solicitud en planes de 1000 Mbps.
+
+3. PLANES GAMER WIN
+--------------------------------------------------------------------
+Planes optimizados para gaming con enrutamiento especial (ExitLag), 
+NAT 1 / NAT 2 y soporte en Discord.
+
+    3.1 Promo Planes Gamer Win
+        - 600 Mbps Gamer: S/ 129.00 al mes (Promo 50% dto x 1 mes en campañas)
+        - 1000 Mbps Gamer: S/ 159.00 al mes (Promo 50% dto x 1 mes en campañas)
+        - 600 Mbps Gamer + WIN TV Premium: S/ 129.90 al mes
+        - 1000 Mbps Gamer + WIN TV Premium: S/ 159.90 al mes
+        - 600 Mbps Gamer + L1MAX: S/ 158.50 al mes
+        * Incluyen: "Nitro" (Duplica velocidad hasta 120h/mes) y 1-2 routers Mesh.
+
+4. PLANES XGSPON (Multi-Gigabit de última generación)
+--------------------------------------------------------------------
+Red con capacidad de hasta 10 Gbps, ideal para hogares inteligentes, 
+trabajo pesado y múltiples usuarios intensivos.
+
+    4.1 Promo Planes XGSPON
+        - 1500 Mbps: S/ 189.00 al mes (Incluye 2 Mesh)
+        - 2000 Mbps: S/ 219.00 al mes (Incluye 2 Mesh)
+        - 2500 Mbps: S/ 239.00 al mes (Incluye 2 Mesh)
+        - 2000 Mbps + TV (30 canales): S/ 189.90 al mes
+        - 2500 Mbps + TV (100 canales): S/ 199.90 al mes (Promo MDT: S/ 99.90 x 2 meses)
+
+
+====================================================================
+       GUÍA DE OFERTAS PERSONALIZADAS SEGÚN CALIDAD DE INTERNET
+====================================================================
+EJEMPLO DEL CLIENTE: ⏱ Ping 154ms • Jitter 48ms • ⬇ 11.8 Mbps • ⬆ 104.6 Mbps
+
+Análisis del estado actual del cliente:
+- Ping (154ms): Pésimo. Indica alta latencia, lo que hace imposible jugar online o tener videollamadas fluidas.
+- Jitter (48ms): Pésimo. Hay mucha inestabilidad en la conexión, provocando cortes, congelamientos o "lag spikes".
+- Descarga (11.8 Mbps): Demasiado baja para los estándares actuales (apenas suficiente para que una persona vea un video en 1080p).
+- Subida (104.6 Mbps): Totalmente asimétrico comparado a su descarga, lo cual es ineficiente.
+
+ESTRATEGIA DE OFERTA "PARECIDO O MEJOR" (Pitch de Ventas):
+Cualquier plan de WIN representa una mejora radical frente a esos números, pero para personalizar la venta debes enfocarte en resolver sus dolores técnicos:
+
+1. Si el cliente busca ECONOMÍA y navegación básica:
+   Ofrecer: MONO WIN 750 Mbps (S/ 109.00)
+   Argumento: "Actualmente tienes solo 11 Mbps de descarga. Por S/ 109, pasaremos tu velocidad a 750 Mbps SIMÉTRICOS. Eso es casi 70 veces más rápido de lo que tienes hoy, estabilizando tu conexión para que todos en casa naveguen sin cortes."
+
+2. Si el cliente menciona PROBLEMAS DE LAG o JUEGOS ONLINE:
+   Ofrecer: PLAN GAMER WIN 600 Mbps (S/ 129.00)
+   Argumento: "Ese ping de 154ms y jitter de 48ms están arruinando tus partidas y llamadas. Nuestro Plan Gamer te ofrece una ruta directa (ExitLag y NAT 1/2) que bajará tu ping a un solo dígito a nivel local, con cero jitter. Además tendrás 600 Mbps puros."
+
+3. Si el cliente quiere ENTRETENIMIENTO a bajo costo:
+   Ofrecer: PROMO HB 750 Mbps + WIN TV Premium (S/ 109.90)
+   Argumento: "Por menos de un Sol adicional (S/0.90) a nuestro plan básico, no solo multiplicas tu velocidad de 11.8 Mbps a 750 Mbps sin cortes, sino que te llevas más de 80 canales premium."
