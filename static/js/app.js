@@ -898,10 +898,104 @@ document.addEventListener("DOMContentLoaded", () => {
     doc.save(filename);
   }
 
+  // ============================================================
+  // CONSTRUCTOR DEL TEXTO DEL REPORTE PARA WHATSAPP
+  // ============================================================
+  function buildReportText() {
+    const ahora = new Date().toLocaleString("es-PE", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    const sorted = [...state.measurements].sort((a, b) =>
+      (VERDICT_RANK[b.metrics.verdict.cls] || 0) - (VERDICT_RANK[a.metrics.verdict.cls] || 0)
+    );
+
+    let text = "📡 *REPORTE DE COBERTURA WI-FI — WIN FIBRA ÓPTICA*\n";
+    text += "━━━━━━━━━━━━━━━━━━━━━━━\n";
+    text += "📅 *Fecha:* " + ahora + "\n";
+    text += "🆔 *ID Dispositivo:* " + DEVICE_ID.slice(0, 8) + "…\n\n";
+
+    text += "📊 *DIAGNÓSTICO POR AMBIENTES:*\n";
+    if (sorted.length === 0) {
+      text += "_No se registraron mediciones._\n";
+    } else {
+      sorted.forEach((e, idx) => {
+        const m = e.metrics;
+        const vLabel = m.verdict ? m.verdict.label : "Sin calificar";
+        const icon = (e.room && e.room.icon) ? e.room.icon : "📍";
+        const roomName = (e.room && e.room.name) ? e.room.name : "Ambiente " + (idx + 1);
+
+        text += "*" + (idx + 1) + ". " + icon + " " + roomName + "*\n";
+        text += "   • Calidad: *" + vLabel.toUpperCase() + "*\n";
+        if (m.download !== null && m.download !== undefined) {
+          text += "   • Descarga: " + m.download + " Mbps | Subida: " + (m.upload !== null && m.upload !== undefined ? m.upload + " Mbps" : "—") + "\n";
+        }
+        text += "   • Ping: " + m.ping + " ms | Jitter: " + m.jitter + " ms\n";
+      });
+    }
+
+    // Diagnóstico general y recomendaciones
+    if (sorted.length >= 2) {
+      const ranks = sorted.map(e => VERDICT_RANK[e.metrics.verdict.cls] || 0);
+      const maxRank = Math.max.apply(null, ranks);
+      const minRank = Math.min.apply(null, ranks);
+      const bestEntry = sorted.find(e => (VERDICT_RANK[e.metrics.verdict.cls] || 0) === maxRank);
+      const worstEntry = sorted.find(e => (VERDICT_RANK[e.metrics.verdict.cls] || 0) === minRank);
+
+      text += "\n🔍 *DIAGNÓSTICO GENERAL DEL HOGAR:*\n";
+      if (maxRank - minRank >= 2) {
+        text += "⚠️ *Cobertura Desigual:* El mejor ambiente es *" + bestEntry.room.name + "* (" + bestEntry.metrics.verdict.label + ") y el punto más crítico es *" + worstEntry.room.name + "* (" + worstEntry.metrics.verdict.label + ").\n";
+        text += "💡 *Recomendación:* Se sugiere reubicar el router o instalar un punto *WIN Mesh Wi-Fi 6* para cubrir zonas muertas.\n";
+      } else if (maxRank <= 1) {
+        text += "🚨 *Señal Débil/Crítica:* Todos los ambientes registran baja calidad. Se requiere verificación técnica de la potencia de fibra óptica.\n";
+      } else if (minRank >= 3) {
+        text += "✅ *Excelente Cobertura:* Tu red Wi-Fi y velocidad operan en niveles óptimos en todas las zonas evaluadas.\n";
+      } else {
+        text += "📶 *Cobertura Aceptable:* Conexión estable con margen de mejora en habitaciones alejadas.\n";
+      }
+    } else if (sorted.length === 1) {
+      const e = sorted[0];
+      text += "\n🔍 *DIAGNÓSTICO:* Medición en *" + e.room.name + "* con resultado *" + e.metrics.verdict.label + "*.\n";
+      if ((VERDICT_RANK[e.metrics.verdict.cls] || 0) <= 2) {
+        text += "💡 *Recomendación:* Considerar reubicación del router o extensor WIN Mesh.\n";
+      }
+    }
+
+    // Oferta recomendada de WIN
+    const overallCls = getOverallVerdictCls();
+    if (overallCls && WIN_OFFERS[overallCls] && WIN_OFFERS[overallCls].ofertas && WIN_OFFERS[overallCls].ofertas.length > 0) {
+      const topOffer = WIN_OFFERS[overallCls].ofertas[0];
+      text += "\n🚀 *SOLUCIÓN WIN SUGERIDA:*\n";
+      text += "• *" + topOffer.nombre + "* (" + topOffer.precio + ")\n";
+      text += "• " + topOffer.pitch + "\n";
+    }
+
+    // Comentario adicional del usuario si existe
+    const incentiveEl = document.getElementById("incentive-text");
+    if (incentiveEl) {
+      const userText = incentiveEl.innerText ? incentiveEl.innerText.trim() : "";
+      const placeholder = incentiveEl.getAttribute("data-placeholder") || "";
+      if (userText && userText !== placeholder) {
+        text += "\n💬 *Comentario del Cliente:*\n\"" + userText + "\"\n";
+      }
+    }
+
+    text += "\n━━━━━━━━━━━━━━━━━━━━━━━\n";
+    text += "Enviado desde *WIN Wi-Fi Scanner Web* (100% Fibra Óptica).\n";
+    text += "Solicito atención o soporte para optimizar mi servicio.";
+
+    return text;
+  }
+
   if (btnSend) {
     btnSend.addEventListener("click", () => {
       const waNumber = "51940061937";
-      window.open("https://wa.me/" + waNumber + "?text=" + encodeURIComponent(buildReportText()), "_blank");
+      const reportText = buildReportText();
+      window.open("https://wa.me/" + waNumber + "?text=" + encodeURIComponent(reportText), "_blank");
     });
   }
 
